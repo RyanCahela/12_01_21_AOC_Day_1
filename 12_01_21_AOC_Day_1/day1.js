@@ -10,6 +10,8 @@ async function getDepthValuesFromFile(filename) {
   }
 }
 
+
+//part 1
 async function countIncreaseseByOne() {
   const depths = await getDepthValuesFromFile("depth_readings.txt");
 
@@ -25,11 +27,12 @@ async function countIncreaseseByOne() {
   }
   
   //output count
-  console.log('count', count);
+  console.log('part 1 count', count);
 }
 
-// countIncreaseseByOne();
+countIncreaseseByOne();
 
+//part 2
 async function countIncreaseseBySlidingWindow(windowSize = 3) {
   const depths = await getDepthValuesFromFile("depth_readings.txt");
 
@@ -53,7 +56,7 @@ async function countIncreaseseBySlidingWindow(windowSize = 3) {
     previousWindowSum = currentSum;
   }
 
-  console.log("count", count);
+  console.log("part 2 count", count);
 }
 
 countIncreaseseBySlidingWindow(3);
