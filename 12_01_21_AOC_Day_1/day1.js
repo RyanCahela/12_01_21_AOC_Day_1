@@ -10,7 +10,10 @@ async function getDepthValuesFromFile(filename) {
 }
 
 async function countIncreasese() {
-  const depths = await getDepthValuesFromFile("depth_readings.txt");
+  const inputStrings = await getDepthValuesFromFile("depth_readings.txt");
+
+  //convert to numbers
+  const depths = inputStrings.map(string => Number(string));
   //create a store (variable) to keep track of the count
   let count = 0;
   
