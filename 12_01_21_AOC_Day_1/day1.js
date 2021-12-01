@@ -3,7 +3,8 @@ const fs = require("fs");
 async function getDepthValuesFromFile(filename) {
   try {
     const string = await fs.promises.readFile(filename, "utf-8");
-    return string.split("\n").map(string => Number(string));
+    const numbers = string.split("\n").map(string => Number(string));
+    return numbers;
   } catch(error) {
     throw new Error(error.message);
   }
@@ -12,7 +13,6 @@ async function getDepthValuesFromFile(filename) {
 async function countIncreaseseByOne() {
   const depths = await getDepthValuesFromFile("depth_readings.txt");
 
-  //convert to numbers
   //create a store (variable) to keep track of the count
   let count = 0;
   
@@ -31,5 +31,11 @@ async function countIncreaseseByOne() {
 countIncreaseseByOne();
 
 async function countIncreaseseBySlidingWindow(windowSize = 3) {
-  
+  const depths = getDepthValuesFromFile("depth_readings.txt");
+
+
+
+
 }
+
+countIncreaseseBySlidingWindow(3);
