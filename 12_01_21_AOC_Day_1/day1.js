@@ -28,14 +28,32 @@ async function countIncreaseseByOne() {
   console.log('count', count);
 }
 
-countIncreaseseByOne();
+// countIncreaseseByOne();
 
 async function countIncreaseseBySlidingWindow(windowSize = 3) {
-  const depths = getDepthValuesFromFile("depth_readings.txt");
+  const depths = await getDepthValuesFromFile("depth_readings.txt");
 
+  //create variable to store count
+  let count = 0;
 
+  //create varable to store previous window sum
+  let previousWindowSum = 0;
 
+  //compare current window sum to previous sum
+  for(let i = 0; i < depths.length - windowSize; i++) {
+    let currentSum = depths.slice(i, i + windowSize).reduce((acc, num) => acc + num, 0);
+    
+    if(currentSum > previousWindowSum) {
+      //if current window sum larger than previous sum increase count
+      count++;
+    }
+    
+    
+    //assign current sum to previous window sum
+    previousWindowSum = currentSum;
+  }
 
+  console.log("count", count);
 }
 
 countIncreaseseBySlidingWindow(3);
