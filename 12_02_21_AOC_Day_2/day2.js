@@ -11,6 +11,7 @@ async function calculatePosition() {
 
   let currentDepth = 0;
   let currentForward = 0;
+  let currentAim = 0;
 
   for(let i = 0; i < commands.length; i++) {
     //split each command into a direction and a value
@@ -19,15 +20,16 @@ async function calculatePosition() {
     switch(direction) {
       case "up":
         // code block
-        currentDepth -= amount;
+        currentAim -= amount;
         break;
       case "down":
         // code block
-        currentDepth += amount;
+        currentAim += amount;
         break;
       case "forward":
         // code block
         currentForward += amount;
+        currentDepth += currentAim * amount;
         break;
       default:
         // code block
