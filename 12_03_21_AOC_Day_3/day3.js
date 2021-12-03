@@ -1,12 +1,11 @@
 const fs = require('fs');
-const arguments = process.argv;
 
 async function getInputFromFile(filename) {
   const data = await fs.promises.readFile(filename, "utf-8");
   return data.split("\n");
 }
 
-async function getGammaRate() {
+async function getGammaAndEpsilonRate() {
   const input = await getInputFromFile(process.argv[2]);
 
   //create two hash tables to store the count of each binary number by index in the string
@@ -50,14 +49,33 @@ async function getGammaRate() {
   }, {})
 
   console.log("zeroCount", zeroCount);
-  
+  console.log("oneCount", oneCount);
 
+  //compare the tables by digit index position
+  let gammaRate = "";
+  for(let i = 0; i < Object.keys(zeroCount).length ; i++) {
+    //highest count for a position is gamma rate
+    if(zeroCount[i] > oneCount[i]) {
+      gammaRate += "0";
+    } else {
+      gammaRate += "1";
+    }
+  }
 
-  //compare the tables by digit index position 
+  let epsilonRate = "";
+  for(let i = 0; i < Object.keys(zeroCount).length; i++) {
+    //lowest count for a position is epsilon rate
+    if(zeroCount[i] > oneCount[i]) {
+      epsilonRate += "1";
+    } else {
+      epsilonRate += "0";
+    }
+  }
 
-  //highest count for a position is gamma rate
+  const gammaRateDecimal = parseInt(gammaRate, 2);
+  const epsilonRateDecimal = parseInt(epsilonRate, 2);
 
-  //lowest count for a position is epsilon rate
+  console.log("power consumption", gammaRateDecimal * epsilonRateDecimal);
 }
 
-getGammaRate();
+getGammaAndEpsilonRate();
