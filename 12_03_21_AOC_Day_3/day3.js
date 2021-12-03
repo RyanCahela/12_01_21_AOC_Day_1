@@ -5,6 +5,7 @@ async function getInputFromFile(filename) {
   return data.split("\n");
 }
 
+//part 1
 async function getGammaAndEpsilonRate() {
   const input = await getInputFromFile(process.argv[2]);
 
@@ -76,6 +77,40 @@ async function getGammaAndEpsilonRate() {
   const epsilonRateDecimal = parseInt(epsilonRate, 2);
 
   console.log("power consumption", gammaRateDecimal * epsilonRateDecimal);
+  return {
+    gammaRate,
+    epsilonRate
+  }
 }
 
 getGammaAndEpsilonRate();
+
+//part 2
+async function getOxygenAndCO2Rating() {
+  const {
+    gammaRate,
+    epsilonRate
+  } = await getGammaAndEpsilonRate();
+  const input = await getInputFromFile(process.argv[2]);
+
+
+  function findMatch(template, numbers) {
+    //define a base case.
+    if(numbers.length === 1) {
+      return numbers[0];
+    }
+
+    //identify the recursive case
+    return findMatch(template, numbers.filter((string, index) => { 
+
+    }));
+  }
+
+  const oxygenReading = findMatch(gammaRate, input);
+  console.log("oxygenReading", oxygenReading);
+
+
+
+}
+
+getOxygenAndCO2Rating();
